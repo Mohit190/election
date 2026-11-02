@@ -1269,3 +1269,880 @@ button:disabled {
   background: #ef4444;
   transform: rotate(90deg);
 }
+
+/* =========================================================
+   KYVEX.AI FUTURISTIC HOME DESIGN — FINAL OVERRIDES
+   Keeps existing complaint, tracking, dashboard and chatbot UI.
+   ========================================================= */
+
+:root {
+  --kyvex-orange: #ff8b32;
+  --kyvex-green: #00c879;
+  --kyvex-blue: #168cff;
+}
+
+body {
+  background:
+    radial-gradient(ellipse at 12% 18%, rgba(18, 91, 220, .22), transparent 38%),
+    radial-gradient(ellipse at 82% 48%, rgba(0, 125, 255, .15), transparent 38%),
+    #030b1c;
+}
+
+.navbar {
+  min-height: 94px;
+  height: auto;
+  padding: 12px 4.5%;
+  background: rgba(3, 11, 29, .88);
+  border-bottom: 1px solid rgba(32, 139, 255, .22);
+  box-shadow: 0 8px 35px rgba(0, 0, 0, .16);
+}
+
+.brand {
+  gap: 13px !important;
+  min-width: 290px;
+  text-decoration: none;
+}
+
+.brand-logo {
+  width: 76px !important;
+  height: 76px !important;
+  object-fit: contain;
+  filter: drop-shadow(0 0 16px rgba(0, 183, 255, .22));
+}
+
+.brand-domain {
+  margin: 0 !important;
+  font-family: Outfit, sans-serif;
+  font-size: clamp(23px, 2vw, 34px) !important;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: -1.4px;
+  background: linear-gradient(100deg, #ff8b32 0%, #e4b42e 35%, #00c879 65%, #168cff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  white-space: nowrap;
+}
+
+.nav-links button {
+  color: #e0eaff;
+  font-size: 13px;
+  padding: 12px 14px;
+}
+
+.nav-links button:hover {
+  background: rgba(0, 126, 255, .13);
+  border-color: rgba(0, 155, 255, .3);
+  box-shadow: 0 0 20px rgba(0, 132, 255, .12);
+}
+
+.language-select {
+  background: rgba(0, 88, 190, .12);
+  border-color: rgba(0, 145, 255, .32);
+  border-radius: 16px;
+  padding: 12px 15px;
+}
+
+.hero {
+  min-height: 690px;
+  padding: 92px 6.1% 80px;
+  grid-template-columns: 1.05fr .95fr;
+  gap: 35px;
+  isolation: isolate;
+  background:
+    radial-gradient(ellipse at 76% 48%, rgba(0, 108, 255, .17), transparent 35%),
+    linear-gradient(115deg, rgba(4, 17, 48, .96), rgba(3, 10, 27, .98) 58%, #030b1b);
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 780px;
+  height: 780px;
+  right: -5%;
+  top: -14%;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, rgba(0, 112, 255, .16) 0 28%, transparent 62%);
+  border: 1px solid rgba(0, 126, 255, .13);
+  box-shadow:
+    0 0 0 42px rgba(0, 113, 255, .025),
+    0 0 0 90px rgba(0, 113, 255, .018),
+    inset 0 0 100px rgba(0, 135, 255, .08);
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 110%;
+  height: 2px;
+  left: -5%;
+  top: 72%;
+  transform: rotate(-17deg);
+  background: linear-gradient(90deg, transparent, rgba(0, 151, 255, .08), #078dff, rgba(0, 215, 255, .18), transparent);
+  box-shadow: 0 0 18px rgba(0, 148, 255, .8);
+  pointer-events: none;
+}
+
+.hero-content {
+  max-width: 760px;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-tag {
+  padding: 12px 22px;
+  border-color: rgba(0, 144, 255, .7);
+  background: rgba(0, 92, 210, .12);
+  color: #53d9ff;
+  font-size: 12px;
+  letter-spacing: 1.8px;
+  box-shadow: inset 0 0 18px rgba(0, 132, 255, .08);
+}
+
+.hero h1 {
+  font-size: clamp(58px, 6.7vw, 96px);
+  line-height: .99;
+  letter-spacing: -4.5px;
+  background: linear-gradient(105deg, #fff 5%, #dcecff 48%, #9acbff 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero-content > p {
+  max-width: 690px;
+  color: #b5c8e8;
+  font-size: clamp(16px, 1.45vw, 20px);
+  line-height: 1.9;
+}
+
+.hero-buttons {
+  margin-top: 40px;
+  gap: 18px;
+}
+
+.primary-btn, .secondary-btn {
+  min-height: 58px;
+  border-radius: 16px;
+  padding: 17px 25px;
+  font-size: 15px;
+}
+
+.primary-btn {
+  background: linear-gradient(105deg, #286cff, #00bce9);
+  box-shadow: 0 12px 35px rgba(0, 126, 255, .3);
+}
+
+.secondary-btn {
+  background: rgba(3, 18, 43, .6);
+  border: 1px solid rgba(0, 137, 255, .5);
+  color: #e9f3ff;
+}
+
+.secondary-btn:hover {
+  background: rgba(0, 113, 255, .15);
+  border-color: #168cff;
+  box-shadow: 0 0 24px rgba(0, 137, 255, .16);
+}
+
+.hero-art {
+  min-height: 500px;
+  position: relative;
+  animation: none;
+  isolation: isolate;
+}
+
+.hero-art::before,
+.hero-art::after {
+  content: "";
+  position: absolute;
+  width: min(620px, 48vw);
+  height: min(620px, 48vw);
+  border-radius: 50%;
+  border: 1px solid rgba(0, 139, 255, .5);
+  box-shadow: 0 0 35px rgba(0, 137, 255, .15), inset 0 0 45px rgba(0, 137, 255, .08);
+  animation: kyvexOrbit 28s linear infinite;
+}
+
+.hero-art::after {
+  width: min(510px, 40vw);
+  height: min(510px, 40vw);
+  border-color: rgba(0, 157, 255, .26);
+  border-style: dashed;
+  animation-direction: reverse;
+  animation-duration: 38s;
+}
+
+.art-circle {
+  width: min(570px, 46vw);
+  height: min(570px, 46vw);
+  border: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 94, 220, .13), rgba(0, 34, 87, .06) 48%, transparent 72%);
+  box-shadow: none;
+  overflow: visible;
+  gap: 2px;
+  z-index: 1;
+}
+
+.art-circle::before {
+  inset: 8%;
+  border: 1px solid rgba(0, 153, 255, .25);
+  border-radius: 50%;
+  border-style: solid;
+  animation: spin 32s linear infinite;
+}
+
+.art-circle::after {
+  inset: -4%;
+  border: 1px solid rgba(255, 143, 46, .22);
+  border-radius: 50%;
+  animation: spin 45s linear infinite reverse;
+}
+
+.hero-logo {
+  width: min(390px, 78%) !important;
+  height: auto !important;
+  max-height: none !important;
+  object-fit: contain;
+  filter:
+    drop-shadow(0 0 18px rgba(0, 140, 255, .48))
+    drop-shadow(0 0 36px rgba(0, 205, 130, .15));
+  animation: kyvexLogoPulse 4.5s ease-in-out infinite;
+}
+
+.art-circle h3 {
+  margin: 20px 0 2px;
+  font-size: clamp(35px, 4.3vw, 62px);
+  font-weight: 900;
+  letter-spacing: -2px;
+  background: linear-gradient(100deg, #ff8b32, #e2b52e 35%, #00c879 68%, #168cff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.art-circle > p {
+  margin-top: 8px !important;
+  color: #71cfff;
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-align: center;
+}
+
+@keyframes kyvexOrbit {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes kyvexLogoPulse {
+  0%, 100% { transform: scale(1); opacity: .88; }
+  50% { transform: scale(1.045); opacity: 1; }
+}
+
+/* Make non-home pages keep the same dark premium background. */
+.page-section {
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(0, 112, 255, .12), transparent 55%);
+}
+
+.footer {
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(0, 100, 220, .13), transparent 65%),
+    #030916;
+}
+
+.footer-brand {
+  background: linear-gradient(100deg, #ff8b32, #e4b42e 35%, #00c879 65%, #168cff);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Responsive layout */
+@media (max-width: 1100px) {
+  .brand { min-width: 220px; }
+  .brand-logo { width: 62px !important; height: 62px !important; }
+  .nav-links button { padding: 10px 8px; font-size: 11px; }
+  .hero { padding-left: 5%; padding-right: 5%; }
+}
+
+@media (max-width: 760px) {
+  .navbar {
+    min-height: 76px;
+    padding: 8px 4%;
+    gap: 10px;
+  }
+  .brand { min-width: 0; gap: 8px !important; }
+  .brand-logo { width: 49px !important; height: 49px !important; }
+  .brand-domain { font-size: 21px !important; }
+  .hero {
+    min-height: auto;
+    grid-template-columns: 1fr;
+    padding: 65px 6% 55px;
+    gap: 24px;
+  }
+  .hero h1 { font-size: clamp(48px, 11vw, 68px); letter-spacing: -2.5px; }
+  .hero-art { min-height: 390px; }
+  .art-circle { width: min(390px, 82vw); height: min(390px, 82vw); }
+  .hero-art::before { width: min(420px, 88vw); height: min(420px, 88vw); }
+  .hero-art::after { width: min(350px, 75vw); height: min(350px, 75vw); }
+  .hero-logo { width: min(270px, 75%) !important; }
+}
+
+@media (max-width: 420px) {
+  .brand-logo { width: 42px !important; height: 42px !important; }
+  .brand-domain { font-size: 18px !important; }
+  .language-select { padding: 7px 8px; }
+  .language-select select { max-width: 68px; }
+  .hero-buttons { flex-direction: column; }
+  .hero-buttons button { width: 100%; }
+  .hero-art { min-height: 330px; }
+  .art-circle { width: 300px; height: 300px; }
+  .hero-art::before { width: 320px; height: 320px; }
+  .hero-art::after { width: 270px; height: 270px; }
+}
+
+
+
+/* =========================================================
+   KYVEX.AI — SCREENSHOT MATCH OVERRIDES
+   Append-only overrides: preserves all existing page styling.
+   ========================================================= */
+
+:root {
+  --blue: #167cff;
+  --cyan: #08c8f5;
+  --orange: #ff8b32;
+  --muted: #a9bad8;
+}
+
+html, body, #root {
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  min-width: 320px;
+  background:
+    radial-gradient(ellipse at 18% 12%, rgba(0, 72, 190, .18), transparent 38%),
+    radial-gradient(ellipse at 78% 42%, rgba(0, 130, 255, .13), transparent 39%),
+    #020b20;
+}
+
+.app {
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(0, 75, 180, .08), transparent 48%),
+    #020b20;
+}
+
+/* Header proportions and spacing */
+.navbar {
+  min-height: 132px;
+  height: 132px;
+  padding: 0 clamp(24px, 4.5vw, 82px);
+  display: flex;
+  gap: clamp(16px, 2.5vw, 42px);
+  background: rgba(2, 11, 31, .91);
+  border: 1px solid rgba(27, 117, 224, .22);
+  border-radius: 0 0 15px 15px;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, .18);
+  backdrop-filter: blur(24px);
+}
+
+.brand {
+  min-width: 0;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 17px;
+}
+
+.brand-logo {
+  width: 88px !important;
+  height: 88px !important;
+  object-fit: contain;
+  filter: drop-shadow(0 0 15px rgba(0, 176, 255, .25));
+}
+
+.brand-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.brand-domain {
+  display: block;
+  font-family: Outfit, sans-serif;
+  font-size: clamp(27px, 2.5vw, 43px) !important;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: -1.8px;
+  background: linear-gradient(100deg, #ff8b32 0%, #e4b42e 35%, #00c879 66%, #168cff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  white-space: nowrap;
+}
+
+.brand-subtitle {
+  color: #d1def4;
+  font-size: 11px;
+  line-height: 1.2;
+  letter-spacing: 2.2px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.nav-links {
+  flex: 1 1 auto;
+  justify-content: center;
+  gap: clamp(5px, 1.6vw, 25px);
+}
+
+.nav-links button {
+  padding: 13px 15px;
+  gap: 11px;
+  color: #eef4ff;
+  font-size: clamp(12px, 1vw, 17px);
+  font-weight: 700;
+  white-space: nowrap;
+  border-radius: 13px;
+}
+
+.nav-links button svg {
+  width: 24px;
+  height: 24px;
+  stroke-width: 2.2;
+}
+
+.nav-links button:hover {
+  background: rgba(0, 126, 255, .13);
+  border-color: rgba(0, 155, 255, .28);
+}
+
+.language-select {
+  flex: 0 0 auto;
+  min-height: 60px;
+  padding: 11px 18px;
+  gap: 12px;
+  border: 1px solid rgba(0, 139, 255, .48);
+  border-radius: 23px;
+  background: rgba(0, 77, 170, .12);
+}
+
+.language-select svg {
+  width: 23px;
+  height: 23px;
+}
+
+.language-select select {
+  font-size: 16px;
+}
+
+/* Hero composition */
+.hero {
+  min-height: 768px;
+  padding: 86px clamp(38px, 6.1vw, 110px) 70px;
+  grid-template-columns: minmax(0, 1.08fr) minmax(420px, .92fr);
+  gap: clamp(20px, 3vw, 55px);
+  background:
+    radial-gradient(ellipse at 77% 43%, rgba(0, 112, 255, .17), transparent 37%),
+    linear-gradient(112deg, #031332 0%, #020d25 57%, #020a1d 100%);
+}
+
+.hero::before {
+  width: min(850px, 70vw);
+  height: min(850px, 70vw);
+  right: -5%;
+  top: -20%;
+  border: 1px solid rgba(0, 126, 255, .16);
+  box-shadow:
+    0 0 0 42px rgba(0, 113, 255, .025),
+    0 0 0 90px rgba(0, 113, 255, .018),
+    inset 0 0 100px rgba(0, 135, 255, .08);
+}
+
+.hero-tag {
+  padding: 15px 26px;
+  margin-bottom: 36px;
+  border: 1px solid rgba(0, 144, 255, .75);
+  background: rgba(0, 92, 210, .12);
+  color: #53d9ff;
+  font-size: 16px;
+  letter-spacing: 1.7px;
+  box-shadow: inset 0 0 18px rgba(0, 132, 255, .08);
+}
+
+.hero h1 {
+  max-width: 760px;
+  margin-bottom: 30px;
+  font-size: clamp(66px, 6.8vw, 112px);
+  line-height: 1.02;
+  letter-spacing: -5.5px;
+  background: linear-gradient(105deg, #fff 5%, #dcecff 48%, #9acbff 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero-content > p {
+  max-width: 790px;
+  color: #b5c8e8;
+  font-size: clamp(17px, 1.45vw, 24px);
+  line-height: 1.9;
+}
+
+.hero-buttons {
+  margin-top: 42px;
+  gap: 23px;
+}
+
+.primary-btn, .secondary-btn {
+  min-height: 72px;
+  padding: 19px 34px;
+  border-radius: 21px;
+  gap: 13px;
+  font-size: clamp(15px, 1.1vw, 20px);
+}
+
+.primary-btn {
+  background: linear-gradient(105deg, #286cff, #00bce9);
+  box-shadow: 0 12px 35px rgba(0, 126, 255, .32);
+}
+
+.secondary-btn {
+  background: rgba(3, 18, 43, .65);
+  border: 1px solid rgba(0, 137, 255, .58);
+}
+
+.hero-buttons svg {
+  width: 27px;
+  height: 27px;
+}
+
+/* Large orbiting brand artwork */
+.hero-art {
+  min-height: 620px;
+  position: relative;
+  isolation: isolate;
+}
+
+.hero-art::before,
+.hero-art::after {
+  content: "";
+  position: absolute;
+  width: min(650px, 48vw);
+  height: min(650px, 48vw);
+  border-radius: 50%;
+  border: 1px solid rgba(0, 139, 255, .5);
+  box-shadow: 0 0 35px rgba(0, 137, 255, .15), inset 0 0 45px rgba(0, 137, 255, .08);
+  animation: kyvexOrbit 28s linear infinite;
+}
+
+.hero-art::after {
+  width: min(535px, 40vw);
+  height: min(535px, 40vw);
+  border-color: rgba(0, 157, 255, .26);
+  border-style: dashed;
+  animation-direction: reverse;
+  animation-duration: 38s;
+}
+
+.art-circle {
+  width: min(590px, 47vw);
+  height: min(590px, 47vw);
+  border: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 94, 220, .13), rgba(0, 34, 87, .06) 48%, transparent 72%);
+  box-shadow: none;
+  overflow: visible;
+  gap: 2px;
+  z-index: 1;
+}
+
+.art-circle::before {
+  inset: 8%;
+  border: 1px solid rgba(0, 153, 255, .25);
+  animation: spin 32s linear infinite;
+}
+
+.art-circle::after {
+  inset: -4%;
+  border: 1px solid rgba(255, 143, 46, .22);
+  animation: spin 45s linear infinite reverse;
+}
+
+.hero-logo {
+  width: min(390px, 78%) !important;
+  height: auto !important;
+  max-height: none !important;
+  object-fit: contain;
+  filter:
+    drop-shadow(0 0 18px rgba(0, 140, 255, .48))
+    drop-shadow(0 0 36px rgba(0, 205, 130, .15));
+  animation: kyvexLogoPulse 4.5s ease-in-out infinite;
+}
+
+.art-circle h3 {
+  margin: 20px 0 2px;
+  font-size: clamp(38px, 4.4vw, 68px);
+  font-weight: 900;
+  letter-spacing: -2px;
+  background: linear-gradient(100deg, #ff8b32, #e2b52e 35%, #00c879 68%, #168cff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.art-circle > p {
+  margin-top: 8px !important;
+  color: #71cfff;
+  font-size: clamp(10px, .9vw, 15px);
+  letter-spacing: 3px;
+  text-align: center;
+}
+
+@keyframes kyvexOrbit {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes kyvexLogoPulse {
+  0%, 100% { transform: scale(1); opacity: .88; }
+  50% { transform: scale(1.045); opacity: 1; }
+}
+
+/* Keep secondary screens visually consistent */
+.page-section {
+  background: radial-gradient(ellipse at 50% 0%, rgba(0, 112, 255, .12), transparent 55%);
+}
+
+.footer {
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(0, 100, 220, .13), transparent 65%),
+    #030916;
+}
+
+.footer-brand {
+  background: linear-gradient(100deg, #ff8b32, #e4b42e 35%, #00c879 65%, #168cff);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Tablet and mobile */
+@media (max-width: 1100px) {
+  .navbar {
+    padding-left: 3%;
+    padding-right: 3%;
+    gap: 10px;
+  }
+  .brand-logo {
+    width: 65px !important;
+    height: 65px !important;
+  }
+  .brand-domain {
+    font-size: 28px !important;
+  }
+  .brand-subtitle {
+    font-size: 9px;
+    letter-spacing: 1.4px;
+  }
+  .nav-links {
+    gap: 0;
+  }
+  .nav-links button {
+    padding: 10px 8px;
+    font-size: 11px;
+  }
+  .nav-links button svg {
+    width: 20px;
+    height: 20px;
+  }
+  .language-select {
+    min-height: 50px;
+    padding: 8px 11px;
+  }
+}
+
+@media (max-width: 760px) {
+  .navbar {
+    min-height: 76px;
+    height: 76px;
+    padding: 8px 4%;
+    gap: 10px;
+  }
+  .brand {
+    gap: 8px;
+  }
+  .brand-logo {
+    width: 49px !important;
+    height: 49px !important;
+  }
+  .brand-domain {
+    font-size: 21px !important;
+  }
+  .brand-subtitle {
+    font-size: 7px;
+    letter-spacing: .8px;
+  }
+  .menu-toggle {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    margin-left: auto;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: rgba(50, 110, 200, .12);
+    color: white;
+  }
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 75px;
+    left: 0;
+    right: 0;
+    padding: 15px;
+    background: #0c172b;
+    border-bottom: 1px solid var(--border);
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .nav-links.open {
+    display: flex;
+  }
+  .nav-links button {
+    padding: 13px;
+    font-size: 13px;
+  }
+  .language-select {
+    min-height: 42px;
+    padding: 7px 8px;
+    border-radius: 12px;
+  }
+  .language-select select {
+    max-width: 78px;
+    font-size: 11px;
+  }
+  .hero {
+    min-height: auto;
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding: 65px 6% 55px;
+    gap: 25px;
+  }
+  .hero-content {
+    margin: auto;
+  }
+  .hero-tag {
+    font-size: 10px;
+    padding: 10px 16px;
+    margin-bottom: 25px;
+  }
+  .hero h1 {
+    font-size: clamp(48px, 11vw, 68px);
+    letter-spacing: -2.5px;
+  }
+  .hero-content > p {
+    margin: auto;
+    font-size: 15px;
+  }
+  .hero-buttons {
+    justify-content: center;
+    gap: 12px;
+  }
+  .primary-btn, .secondary-btn {
+    min-height: 55px;
+    padding: 14px 18px;
+    border-radius: 14px;
+    font-size: 13px;
+  }
+  .hero-art {
+    min-height: 390px;
+  }
+  .art-circle {
+    width: min(390px, 82vw);
+    height: min(390px, 82vw);
+  }
+  .hero-art::before {
+    width: min(420px, 88vw);
+    height: min(420px, 88vw);
+  }
+  .hero-art::after {
+    width: min(350px, 75vw);
+    height: min(350px, 75vw);
+  }
+  .hero-logo {
+    width: min(270px, 75%) !important;
+  }
+  .feature-grid, .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  .trust-strip {
+    gap: 22px;
+    flex-direction: column;
+    align-items: center;
+  }
+  .chat-widget {
+    right: 12px !important;
+    bottom: 85px !important;
+    width: calc(100vw - 24px);
+  }
+  .chatbot-floating-btn {
+    right: 16px;
+    bottom: 16px;
+  }
+  .notice {
+    right: 12px;
+    top: 85px;
+  }
+}
+
+@media (max-width: 420px) {
+  .brand-logo {
+    width: 42px !important;
+    height: 42px !important;
+  }
+  .brand-domain {
+    font-size: 18px !important;
+  }
+  .brand-subtitle {
+    font-size: 6px;
+    letter-spacing: .5px;
+  }
+  .hero-buttons {
+    flex-direction: column;
+  }
+  .hero-buttons button {
+    width: 100%;
+  }
+  .hero-art {
+    min-height: 330px;
+  }
+  .art-circle {
+    width: 300px;
+    height: 300px;
+  }
+  .hero-art::before {
+    width: 320px;
+    height: 320px;
+  }
+  .hero-art::after {
+    width: 270px;
+    height: 270px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
