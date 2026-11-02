@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 import "./styles.css";
 
-const API = "https://election-1-63ee.onrender.com/api";
+const API = "http://127.0.0.1:8000/api";
 
 const translations = {
   en: {
@@ -571,67 +571,186 @@ function App() {
         )}
 
         {page === "dashboard" && (
-          <section className="page-section">
-            <div className="section-heading">
-              <span>PUBLIC INFORMATION</span>
-              <h2>{t.dashboard}</h2>
-              <p>Complaint statistics from the backend database.</p>
+          <section className="page-section dashboard-page">
+            <div className="dashboard-topline">
+              <div>
+                <span className="dashboard-eyebrow">KYVEX.AI / ANALYTICS</span>
+                <h1 className="dashboard-title">Public Service <span>Insights</span></h1>
+                <p className="dashboard-subtitle">A live overview of citizen complaints and service activity.</p>
+              </div>
+              <button className="dashboard-refresh" onClick={loadDashboard}>
+                <span className="refresh-symbol">↻</span> Refresh data
+              </button>
             </div>
-
-            <button className="secondary-btn refresh-btn" onClick={loadDashboard}>
-              Refresh Dashboard
-            </button>
 
             {dashboard ? (
               <>
-                <div className="stats-grid">
-                  <div className="stat-card">
-                    <span>Total Complaints</span>
-                    <h2>{dashboard.total}</h2>
-                  </div>
-                  <div className="stat-card">
-                    <span>{t.received}</span>
-                    <h2>{(dashboard.statuses || []).reduce((sum, item) => sum + item.count, 0)}</h2>
-                  </div>
-                  <div className="stat-card">
-                    <span>Categories</span>
-                    <h2>{(dashboard.categories || []).length}</h2>
-                  </div>
+                <div className="dashboard-livebar">
+                  <span className="live-indicator" />
+                  <span>Dashboard connected</span>
+                  <span className="live-divider">/</span>
+                  <span>Data from your backend</span>
                 </div>
 
-                <div className="dashboard-card">
-                  <h3>Complaints by Category</h3>
-                  {(dashboard.categories || []).length ? (
-                    dashboard.categories.map(item => (
-                      <div className="bar-row" key={item.category}>
-                        <span>{item.category}</span>
-                        <div className="bar-track">
-                          <div className="bar-fill"
-                            style={{
-                              width: dashboard.total > 0
-                                ? (item.count / dashboard.total * 100) + "%"
-                                : "0%"
-                            }} />
-                        </div>
-                        <strong>{item.count}</strong>
-                      </div>
-                    ))
-                  ) : <p>No complaints have been submitted yet.</p>}
-                </div>
-
-                <div className="dashboard-card">
-                  <h3>Complaint Status</h3>
-                  {(dashboard.statuses || []).map(item => (
-                    <div className="result-row" key={item.status}>
-                      <span>{item.status}</span><strong>{item.count}</strong>
+                <div className="dashboard-kpis">
+                  <div className="dashboard-kpi kpi-blue">
+                    <div className="kpi-top"><span>Total complaints</span><span className="kpi-icon">▤</span></div>
+                    <div className="kpi-number">{dashboard.total ?? 0}</div>
+                    <div className="kpi-foot"><span className="kpi-dot blue-dot" /> All submitted complaints</div>
+                  </div>
+                  <div className="dashboard-kpi kpi-cyan">
+                    <div className="kpi-top"><span>Tracked statuses</span><span className="kpi-icon">◉</span></div>
+                    <div className="kpi-number">{(dashboard.statuses || []).reduce((sum, item) => sum + Number(item.count || 0), 0)}</div>
+                    <div className="kpi-foot"><span className="kpi-dot cyan-dot" /> Complaints represented by status</div>
+                  </div>
+                  <div className="dashboard-kpi kpi-violet">
+                    <div className="kpi-top"><span>Categories</span><span className="kpi-icon">▦</span></div>
+                    <div className="kpi-number">{(dashboard.categories || []).length}</div>
+                    <div className="kpi-foot"><span className="kpi-dot violet-dot" /> Service areas reported</div>
+                  </div>
+                  <div className="dashboard-kpi kpi-orange">
+                    <div className="kpi-top"><span>Top category</span><span className="kpi-icon">↗</span></div>
+                    <div className="kpi-number kpi-category-name">
+                      {(dashboard.categories || []).length
+                        ? [...dashboard.categories].sort((a, b) => Number(b.count || 0) - Number(a.count || 0))[0].category
+                        : "—"}
                     </div>
-                  ))}
+                    <div className="kpi-foot"><span className="kpi-dot orange-dot" /> Highest reported volume</div>
+                  </div>
+                </div>
+
+                <div className="dashboard-main-grid">
+                  <div className="dashboard-panel category-panel">
+                    <div className="panel-heading">
+                      <div>
+                        <span className="panel-kicker">BREAKDOWN</span>
+                        <h2>Complaints by category</h2>
+                        <p>Compare the volume reported across service areas.</p>
+                      </div>
+                      <span className="panel-badge">CATEGORY VIEW</span>
+                    </div>
+                    {(dashboard.categories || []).length ? (
+                      <div className="category-chart">
+                        {[...dashboard.categories]
+                          .sort((a, b) => Number(b.count || 0) - Number(a.count || 0))
+                          .map((item, index) => {
+                            const total = Number(dashboard.total || 0);
+                            const count = Number(item.count || 0);
+                            const percent = total > 0 ? Math.min(100, count / total * 100) : 0;
+                            return (
+                              <div className="category-chart-row" key={item.category}>
+                                <div className="category-row-top">
+                                  <span className="category-label"><i className={`category-index category-index-${index % 5}`} />{item.category}</span>
+                                  <strong>{count}<small>{`  ${percent.toFixed(0)}%`}</small></strong>
+                                </div>
+                                <div className="category-track">
+                                  <div className={`category-fill category-fill-${index % 5}`} style={{ width: `${percent}%` }} />
+                                </div>
+                              </div>
+                            );
+                          })}
+                      </div>
+                    ) : (
+                      <div className="dashboard-empty"><span>▤</span><strong>No category data yet</strong><p>Category statistics will appear when complaints are submitted.</p></div>
+                    )}
+                  </div>
+
+                  <div className="dashboard-panel status-panel">
+                    <div className="panel-heading">
+                      <div>
+                        <span className="panel-kicker">MONITORING</span>
+                        <h2>Complaint status</h2>
+                        <p>Current distribution by recorded status.</p>
+                      </div>
+                    </div>
+                    {(dashboard.statuses || []).length ? (
+                      <div className="status-list">
+                        {[...dashboard.statuses].sort((a, b) => Number(b.count || 0) - Number(a.count || 0)).map((item, index) => {
+                          const allStatuses = (dashboard.statuses || []).reduce((sum, row) => sum + Number(row.count || 0), 0);
+                          const percent = allStatuses > 0 ? Number(item.count || 0) / allStatuses * 100 : 0;
+                          return (
+                            <div className="status-item" key={item.status}>
+                              <div className="status-item-top">
+                                <span><i className={`status-indicator status-indicator-${index % 4}`} />{item.status}</span>
+                                <strong>{item.count}</strong>
+                              </div>
+                              <div className="status-track"><div className={`status-fill status-fill-${index % 4}`} style={{ width: `${percent}%` }} /></div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    ) : (
+                      <div className="dashboard-empty compact-empty"><span>◉</span><strong>No status data yet</strong><p>Status distribution will show here.</p></div>
+                    )}
+                    <div className="status-panel-note"><span className="note-icon">i</span><span>Counts reflect the latest response returned by your backend API.</span></div>
+                  </div>
+                </div>
+
+                <div className="dashboard-visual-grid">
+                  <div className="dashboard-panel donut-panel">
+                    <div className="panel-heading">
+                      <div><span className="panel-kicker">STATUS MIX</span><h2>Complaint distribution</h2><p>Share of complaints by current status.</p></div>
+                      <span className="panel-badge">LIVE SPLIT</span>
+                    </div>
+                    {(() => {
+                      const rows = [...(dashboard.statuses || [])].sort((a, b) => Number(b.count || 0) - Number(a.count || 0));
+                      const total = rows.reduce((sum, row) => sum + Number(row.count || 0), 0);
+                      const colors = ['#4b8dff', '#36d6cf', '#a78bfa', '#ffad5e', '#f472b6', '#8bd17c'];
+                      let cursor = 0;
+                      const segments = rows.map((row, index) => {
+                        const start = cursor;
+                        cursor += total ? Number(row.count || 0) / total * 100 : 0;
+                        return `${colors[index % colors.length]} ${start}% ${cursor}%`;
+                      });
+                      return rows.length ? (
+                        <div className="donut-layout">
+                          <div className="donut-chart" style={{ background: `conic-gradient(${segments.join(', ')})` }}>
+                            <div className="donut-hole"><strong>{total}</strong><span>COMPLAINTS</span></div>
+                          </div>
+                          <div className="donut-legend">
+                            {rows.map((row, index) => <div className="donut-legend-row" key={row.status}>
+                              <span className="legend-name"><i style={{ background: colors[index % colors.length] }} />{row.status}</span>
+                              <strong>{total ? Math.round(Number(row.count || 0) / total * 100) : 0}%</strong>
+                            </div>)}
+                          </div>
+                        </div>
+                      ) : <div className="dashboard-empty compact-empty"><strong>No status data yet</strong><p>The chart will appear when status data is available.</p></div>;
+                    })()}
+                  </div>
+
+                  <div className="dashboard-panel ranking-panel">
+                    <div className="panel-heading">
+                      <div><span className="panel-kicker">PRIORITY RADAR</span><h2>Service area ranking</h2><p>Find categories contributing the most complaints.</p></div>
+                      <span className="panel-badge">TOP AREAS</span>
+                    </div>
+                    <div className="ranking-list">
+                      {[...(dashboard.categories || [])].sort((a, b) => Number(b.count || 0) - Number(a.count || 0)).map((item, index) => {
+                        const max = Math.max(1, ...((dashboard.categories || []).map(row => Number(row.count || 0))));
+                        const count = Number(item.count || 0);
+                        const share = Number(dashboard.total || 0) ? Math.round(count / Number(dashboard.total) * 100) : 0;
+                        return <div className="ranking-row" key={item.category}>
+                          <span className={`ranking-number ranking-number-${index % 5}`}>{String(index + 1).padStart(2, '0')}</span>
+                          <div className="ranking-main"><div className="ranking-title"><strong>{item.category}</strong><span>{count} cases · {share}%</span></div><div className="ranking-track"><div className={`ranking-fill ranking-fill-${index % 5}`} style={{ width: `${count / max * 100}%` }} /></div></div>
+                        </div>;
+                      })}
+                      {!(dashboard.categories || []).length && <div className="dashboard-empty compact-empty"><strong>No category data yet</strong></div>}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="dashboard-bottom-strip">
+                  <div className="bottom-strip-icon">✦</div>
+                  <div><strong>Make decisions with clear data.</strong><p>Use the category and status breakdowns to spot where citizen support may be needed most.</p></div>
+                  <div className="bottom-strip-tag">CITIZEN SERVICE ANALYTICS</div>
                 </div>
               </>
             ) : (
-              <p className="empty-message">
-                Dashboard data will appear here when the backend is connected.
-              </p>
+              <div className="dashboard-connect-card">
+                <div className="connect-graphic">▤</div>
+                <h2>Your analytics are getting ready</h2>
+                <p>Connect the backend API to load complaint totals, category breakdowns and status monitoring.</p>
+                <button className="dashboard-refresh" onClick={loadDashboard}>↻ Try again</button>
+              </div>
             )}
           </section>
         )}
