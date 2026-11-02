@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 import "./styles.css";
 
-const API = "http://127.0.0.1:8000/api";
+const API = "https://election-1-63ee.onrender.com";
 
 const translations = {
   en: {
