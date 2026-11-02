@@ -7,12 +7,12 @@ import {
 } from "lucide-react";
 import "./styles.css";
 
-const API = "https://election-1-63ee.onrender.com/api";
+const API = "https://election-1-63ee.onrender.com";
 
 const translations = {
   en: {
-    brand: "Digital Jan Samvad",
-    subtitle: "Your Voice, Your Government",
+    brand: "Kyvex.ai",
+    subtitle: "AI Powered Digital Platform",
     home: "Home",
     complaint: "Register Complaint",
     track: "Track Complaint",
@@ -28,7 +28,7 @@ const translations = {
     submit: "Submit Complaint",
     reference: "Reference Number",
     search: "Search Complaint",
-    chatTitle: "Jan Samvad Voice Assistant",
+    chatTitle: "Kyvex AI Assistant",
     chatPlaceholder: "Type or speak your message...",
     send: "Send",
     success: "Complaint submitted successfully!",
@@ -37,8 +37,8 @@ const translations = {
     language: "Language"
   },
   hi: {
-    brand: "डिजिटल जन संवाद",
-    subtitle: "आपकी आवाज़, आपकी सरकार",
+    brand: "Kyvex.ai",
+    subtitle: "AI आधारित डिजिटल प्लेटफ़ॉर्म",
     home: "होम",
     complaint: "शिकायत दर्ज करें",
     track: "शिकायत ट्रैक करें",
@@ -54,7 +54,7 @@ const translations = {
     submit: "शिकायत जमा करें",
     reference: "रेफरेंस नंबर",
     search: "शिकायत खोजें",
-    chatTitle: "जन संवाद वॉइस सहायक",
+    chatTitle: "Kyvex AI सहायक",
     chatPlaceholder: "अपना संदेश लिखें या बोलें...",
     send: "भेजें",
     success: "शिकायत सफलतापूर्वक दर्ज हुई!",
@@ -63,8 +63,8 @@ const translations = {
     language: "भाषा"
   },
   pa: {
-    brand: "ਡਿਜੀਟਲ ਜਨ ਸੰਵਾਦ",
-    subtitle: "ਤੁਹਾਡੀ ਆਵਾਜ਼, ਤੁਹਾਡੀ ਸਰਕਾਰ",
+    brand: "Kyvex.ai",
+    subtitle: "AI ਅਧਾਰਿਤ ਡਿਜੀਟਲ ਪਲੇਟਫਾਰਮ",
     home: "ਮੁੱਖ ਪੰਨਾ",
     complaint: "ਸ਼ਿਕਾਇਤ ਦਰਜ ਕਰੋ",
     track: "ਸ਼ਿਕਾਇਤ ਟ੍ਰੈਕ ਕਰੋ",
@@ -80,7 +80,7 @@ const translations = {
     submit: "ਸ਼ਿਕਾਇਤ ਜਮ੍ਹਾਂ ਕਰੋ",
     reference: "ਰੈਫਰੈਂਸ ਨੰਬਰ",
     search: "ਸ਼ਿਕਾਇਤ ਲੱਭੋ",
-    chatTitle: "ਜਨ ਸੰਵਾਦ ਵੌਇਸ ਸਹਾਇਕ",
+    chatTitle: "Kyvex AI ਸਹਾਇਕ",
     chatPlaceholder: "ਆਪਣਾ ਸੁਨੇਹਾ ਲਿਖੋ ਜਾਂ ਬੋਲੋ...",
     send: "ਭੇਜੋ",
     success: "ਸ਼ਿਕਾਇਤ ਸਫਲਤਾਪੂਰਵਕ ਦਰਜ ਹੋ ਗਈ!",
@@ -388,12 +388,9 @@ function App() {
   return (
     <div className="app">
       <header className="navbar">
-        <div className="brand" onClick={() => navigate("home")}>
-          <div className="brand-icon"><ShieldCheck size={26} /></div>
-          <div>
-            <h2>{t.brand}</h2>
-            <small>{t.subtitle}</small>
-          </div>
+        <div className="brand" onClick={() => navigate("home")} aria-label="Kyvex.ai home">
+          <img className="brand-logo" src="/kyvex-symbol.png" alt="Kyvex logo" />
+          <span className="brand-domain">Kyvex.ai</span>
         </div>
 
         <button className="menu-toggle" onClick={() => setMobileMenu(!mobileMenu)}>
@@ -422,7 +419,7 @@ function App() {
           <>
             <section className="hero">
               <div className="hero-content">
-                <span className="hero-tag">🇮🇳 Digital India Initiative</span>
+                <span className="hero-tag">KYVEX.AI DIGITAL PLATFORM</span>
                 <h1>{t.hero}</h1>
                 <p>{t.heroText}</p>
 
@@ -438,9 +435,9 @@ function App() {
 
               <div className="hero-art">
                 <div className="art-circle">
-                  <div className="art-icon">🏛️</div>
-                  <h3>जन संवाद</h3>
-                  <p>People First Governance</p>
+                  <img className="hero-logo" src="/kyvex-symbol.png" alt="Kyvex symbol" />
+                  <h3>Kyvex.ai</h3>
+                  <p>AI POWERED DIGITAL PLATFORM</p>
                 </div>
               </div>
             </section>
@@ -730,15 +727,15 @@ function App() {
         className="chatbot-floating-btn"
         onClick={toggleChat}
         aria-label={isChatOpen ? "Close chatbot" : "Open chatbot"}
-        title={isChatOpen ? "Close chatbot" : "Open Jan Samvad Assistant"}
+        title={isChatOpen ? "Close chatbot" : "Open Kyvex AI Assistant"}
       >
         {isChatOpen ? <X size={27} /> : <MessageCircle size={27} />}
       </button>
 
       <footer className="footer">
-        <div className="footer-brand">{t.brand}</div>
-        <p>Connecting Citizens with Government Services</p>
-        <small>© 2026 Digital Jan Samvad. All rights reserved.</small>
+        <div className="footer-brand">Kyvex.ai</div>
+        <p>Smart Technology. Better Digital Experiences.</p>
+        <small>© 2026 Kyvex.ai. All rights reserved.</small>
       </footer>
     </div>
   );
