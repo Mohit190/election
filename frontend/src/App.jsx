@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 import "./styles.css";
 
-const API = "https://election-1-63ee.onrender.com/api";
+const API = "http://127.0.0.1:8000/api";
 
 const translations = {
   en: {
@@ -736,6 +736,29 @@ function App() {
                       {!(dashboard.categories || []).length && <div className="dashboard-empty compact-empty"><strong>No category data yet</strong></div>}
                     </div>
                   </div>
+                </div>
+
+                <div className="executive-insights">
+                  <div className="executive-heading">
+                    <div><span className="panel-kicker">EXECUTIVE SUMMARY</span><h2>Signals worth your attention</h2><p>Quick observations calculated from the latest backend snapshot.</p></div>
+                    <span className="insight-live-pill"><i /> LIVE SNAPSHOT</span>
+                  </div>
+                  {(() => {
+                    const categories = [...(dashboard.categories || [])].sort((a, b) => Number(b.count || 0) - Number(a.count || 0));
+                    const statuses = [...(dashboard.statuses || [])].sort((a, b) => Number(b.count || 0) - Number(a.count || 0));
+                    const total = Number(dashboard.total || 0);
+                    const statusTotal = statuses.reduce((sum, row) => sum + Number(row.count || 0), 0);
+                    const top = categories[0];
+                    const topShare = top && total ? Math.round(Number(top.count || 0) / total * 100) : 0;
+                    const topStatus = statuses[0];
+                    const statusShare = topStatus && statusTotal ? Math.round(Number(topStatus.count || 0) / statusTotal * 100) : 0;
+                    const average = categories.length ? (total / categories.length).toFixed(1) : '0';
+                    return <div className="insight-cards">
+                      <article className="insight-card insight-blue"><span className="insight-icon">↗</span><span className="insight-label">Highest-volume category</span><strong>{top ? top.category : 'No data yet'}</strong><p>{top ? `${Number(top.count || 0)} complaints · ${topShare}% of total volume` : 'Category insights will appear after data is available.'}</p><div className="insight-mini-track"><i style={{width: `${topShare}%`}} /></div></article>
+                      <article className="insight-card insight-teal"><span className="insight-icon">◉</span><span className="insight-label">Most common status</span><strong>{topStatus ? topStatus.status : 'No data yet'}</strong><p>{topStatus ? `${Number(topStatus.count || 0)} complaints · ${statusShare}% of tracked statuses` : 'Status insights will appear after data is available.'}</p><div className="insight-mini-track"><i style={{width: `${statusShare}%`}} /></div></article>
+                      <article className="insight-card insight-violet"><span className="insight-icon">▦</span><span className="insight-label">Average per category</span><strong>{average}</strong><p>Simple average across {categories.length} reported service {categories.length === 1 ? 'area' : 'areas'}.</p><div className="insight-footnote">Calculated from current totals</div></article>
+                    </div>;
+                  })()}
                 </div>
 
                 <div className="dashboard-bottom-strip">
