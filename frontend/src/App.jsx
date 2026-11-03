@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 import "./styles.css";
 
-const API = "https://election-1-63ee.onrender.com/api";
+const API = "http://127.0.0.1:8000/api";
 
 const translations = {
   en: {
@@ -15,19 +15,19 @@ const translations = {
     subtitle: "AI Powered Digital Platform",
     home: "Home",
     complaint: "Register Complaint",
-    track: "Track Complaint",
+
     dashboard: "Dashboard",
     hero: "Your Voice Matters.",
     heroText: "A simple and transparent platform to connect citizens with government services.",
     register: "Register a Complaint",
-    trackBtn: "Track Your Complaint",
+
     area: "Your Area",
     category: "Complaint Category",
     title: "Complaint Title",
     description: "Describe Your Complaint",
     submit: "Submit Complaint",
     reference: "Reference Number",
-    search: "Search Complaint",
+
     chatTitle: "Kyvex AI Assistant",
     chatPlaceholder: "Type or speak your message...",
     send: "Send",
@@ -41,19 +41,19 @@ const translations = {
     subtitle: "AI आधारित डिजिटल प्लेटफ़ॉर्म",
     home: "होम",
     complaint: "शिकायत दर्ज करें",
-    track: "शिकायत ट्रैक करें",
+
     dashboard: "डैशबोर्ड",
     hero: "आपकी आवाज़ महत्वपूर्ण है।",
     heroText: "नागरिकों और सरकार को जोड़ने का एक सरल और पारदर्शी मंच।",
     register: "शिकायत दर्ज करें",
-    trackBtn: "शिकायत ट्रैक करें",
+
     area: "आपका क्षेत्र",
     category: "शिकायत की श्रेणी",
     title: "शिकायत का शीर्षक",
     description: "अपनी शिकायत बताएं",
     submit: "शिकायत जमा करें",
     reference: "रेफरेंस नंबर",
-    search: "शिकायत खोजें",
+
     chatTitle: "Kyvex AI सहायक",
     chatPlaceholder: "अपना संदेश लिखें या बोलें...",
     send: "भेजें",
@@ -67,19 +67,19 @@ const translations = {
     subtitle: "AI ਅਧਾਰਿਤ ਡਿਜੀਟਲ ਪਲੇਟਫਾਰਮ",
     home: "ਮੁੱਖ ਪੰਨਾ",
     complaint: "ਸ਼ਿਕਾਇਤ ਦਰਜ ਕਰੋ",
-    track: "ਸ਼ਿਕਾਇਤ ਟ੍ਰੈਕ ਕਰੋ",
+
     dashboard: "ਡੈਸ਼ਬੋਰਡ",
     hero: "ਤੁਹਾਡੀ ਆਵਾਜ਼ ਮਹੱਤਵਪੂਰਨ ਹੈ।",
     heroText: "ਨਾਗਰਿਕਾਂ ਅਤੇ ਸਰਕਾਰ ਨੂੰ ਜੋੜਨ ਲਈ ਇੱਕ ਸੌਖਾ ਮੰਚ।",
     register: "ਸ਼ਿਕਾਇਤ ਦਰਜ ਕਰੋ",
-    trackBtn: "ਸ਼ਿਕਾਇਤ ਟ੍ਰੈਕ ਕਰੋ",
+
     area: "ਤੁਹਾਡਾ ਇਲਾਕਾ",
     category: "ਸ਼ਿਕਾਇਤ ਦੀ ਕਿਸਮ",
     title: "ਸ਼ਿਕਾਇਤ ਦਾ ਸਿਰਲੇਖ",
     description: "ਆਪਣੀ ਸ਼ਿਕਾਇਤ ਦੱਸੋ",
     submit: "ਸ਼ਿਕਾਇਤ ਜਮ੍ਹਾਂ ਕਰੋ",
     reference: "ਰੈਫਰੈਂਸ ਨੰਬਰ",
-    search: "ਸ਼ਿਕਾਇਤ ਲੱਭੋ",
+
     chatTitle: "Kyvex AI ਸਹਾਇਕ",
     chatPlaceholder: "ਆਪਣਾ ਸੁਨੇਹਾ ਲਿਖੋ ਜਾਂ ਬੋਲੋ...",
     send: "ਭੇਜੋ",
@@ -160,7 +160,7 @@ function App() {
         title: "",
         description: ""
       });
-      setPage("track");
+      setPage("register");
     } catch (error) {
       setNotice(error.message || "Server connection failed.");
     } finally {
@@ -168,26 +168,6 @@ function App() {
     }
   };
 
-  const trackComplaint = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setComplaint(null);
-    setNotice("");
-
-    try {
-      const response = await fetch(
-        API + "/complaints/" + encodeURIComponent(reference.trim())
-      );
-      const data = await response.json();
-
-      if (!response.ok) throw new Error(data.detail || "Complaint not found");
-      setComplaint(data);
-    } catch (error) {
-      setNotice(error.message || "Unable to track complaint.");
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const speakText = (text) => {
     if (!("speechSynthesis" in window)) {
@@ -400,7 +380,6 @@ function App() {
         <nav className={mobileMenu ? "nav-links open" : "nav-links"}>
           <button onClick={() => navigate("home")}><Home size={17} /> {t.home}</button>
           <button onClick={() => navigate("register")}><FileText size={17} /> {t.complaint}</button>
-          <button onClick={() => navigate("track")}><Search size={17} /> {t.track}</button>
           <button onClick={() => navigate("dashboard")}><LayoutDashboard size={17} /> {t.dashboard}</button>
         </nav>
 
@@ -427,9 +406,14 @@ function App() {
                   <button className="primary-btn" onClick={() => navigate("register")}>
                     <FileText size={18} /> {t.register}
                   </button>
-                  <button className="secondary-btn" onClick={() => navigate("track")}>
-                    <Search size={18} /> {t.trackBtn}
+                  <button className="secondary-btn" onClick={() => navigate("dashboard")}>
+                    <LayoutDashboard size={18} /> Explore public insights
                   </button>
+                </div>
+                <div className="hero-proof-row">
+                  <span><i className="proof-dot" /> Citizen-first services</span>
+                  <span><i className="proof-dot proof-dot-teal" /> Multilingual access</span>
+                  <span><i className="proof-dot proof-dot-violet" /> Transparent insights</span>
                 </div>
               </div>
 
@@ -446,26 +430,74 @@ function App() {
               <div className="section-heading">
                 <span>OUR SERVICES</span>
                 <h2>How Can We Help You?</h2>
+                <p>Simple digital services designed to make civic participation easier.</p>
               </div>
 
               <div className="feature-grid">
-                <div className="feature-card" onClick={() => navigate("register")}>
+                <div className="feature-card" role="button" tabIndex={0}
+                  onClick={() => navigate("register")}
+                  onKeyDown={e => e.key === "Enter" && navigate("register")}>
                   <div className="feature-icon"><FileText /></div>
                   <h3>Register Complaint</h3>
                   <p>Submit your public grievance quickly and easily.</p>
+                  <span className="feature-link">Start a report <span aria-hidden="true">↗</span></span>
                 </div>
 
-                <div className="feature-card" onClick={() => navigate("track")}>
-                  <div className="feature-icon"><Search /></div>
-                  <h3>Track Complaint</h3>
-                  <p>Check the current status of your submitted complaint.</p>
-                </div>
-
-                <div className="feature-card" onClick={() => navigate("dashboard")}>
-                  <div className="feature-icon"><LayoutDashboard /></div>
+                <div className="feature-card" role="button" tabIndex={0}
+                  onClick={() => navigate("dashboard")}
+                  onKeyDown={e => e.key === "Enter" && navigate("dashboard")}>
+                  <div className="feature-icon feature-icon-teal"><LayoutDashboard /></div>
                   <h3>Public Dashboard</h3>
-                  <p>View complaint statistics and public information.</p>
+                  <p>Explore complaint statistics and public service information.</p>
+                  <span className="feature-link">Explore insights <span aria-hidden="true">↗</span></span>
                 </div>
+
+                <div className="feature-card" role="button" tabIndex={0}
+                  onClick={toggleChat}
+                  onKeyDown={e => e.key === "Enter" && toggleChat()}>
+                  <div className="feature-icon feature-icon-violet"><MessageCircle /></div>
+                  <h3>Kyvex AI Assistant</h3>
+                  <p>Get help with the platform through the built-in chat assistant.</p>
+                  <span className="feature-link">Ask for help <span aria-hidden="true">↗</span></span>
+                </div>
+
+                <div className="feature-card" role="button" tabIndex={0}
+                  onClick={() => setLanguage(language === "en" ? "hi" : language === "hi" ? "pa" : "en")}
+                  onKeyDown={e => e.key === "Enter" && setLanguage(language === "en" ? "hi" : language === "hi" ? "pa" : "en")}>
+                  <div className="feature-icon feature-icon-orange"><Languages /></div>
+                  <h3>Multilingual Access</h3>
+                  <p>Switch the interface between English, Hindi and Punjabi.</p>
+                  <span className="language-pills"><span>English</span><span>हिंदी</span><span>ਪੰਜਾਬੀ</span></span>
+                  <span className="feature-link">Change language <span aria-hidden="true">↗</span></span>
+                </div>
+              </div>
+            </section>
+
+            <section className="process-section">
+              <div className="process-heading">
+                <span className="process-eyebrow">SIMPLE BY DESIGN</span>
+                <h2>From concern to <span>action.</span></h2>
+                <p>A clear, citizen-friendly way to bring local issues to the right place.</p>
+              </div>
+              <div className="process-grid">
+                <article className="process-card">
+                  <span className="process-index">01</span>
+                  <div className="process-symbol"><FileText size={22} /></div>
+                  <h3>Share the issue</h3>
+                  <p>Describe the concern and choose the service area that best fits.</p>
+                </article>
+                <article className="process-card">
+                  <span className="process-index">02</span>
+                  <div className="process-symbol process-symbol-teal"><ShieldCheck size={22} /></div>
+                  <h3>Submit securely</h3>
+                  <p>Send the details through a simple form, with voice input available.</p>
+                </article>
+                <article className="process-card">
+                  <span className="process-index">03</span>
+                  <div className="process-symbol process-symbol-violet"><LayoutDashboard size={22} /></div>
+                  <h3>See the bigger picture</h3>
+                  <p>Explore public service statistics and understand reported concerns.</p>
+                </article>
               </div>
             </section>
 
@@ -525,48 +557,6 @@ function App() {
                 {loading ? "Submitting..." : t.submit}
               </button>
             </form>
-          </section>
-        )}
-
-        {page === "track" && (
-          <section className="page-section">
-            <div className="section-heading">
-              <span>COMPLAINT STATUS</span>
-              <h2>{t.track}</h2>
-              <p>Enter your reference number to check your complaint.</p>
-            </div>
-
-            <form className="track-card" onSubmit={trackComplaint}>
-              <label>{t.reference}</label>
-              <input required placeholder="Example: DJS-XXXXXXXXXX"
-                value={reference}
-                onChange={e => setReference(e.target.value)} />
-              <button className="primary-btn" disabled={loading}>
-                <Search size={17} /> {loading ? "Searching..." : t.search}
-              </button>
-            </form>
-
-            {complaint && (
-              <div className="result-card">
-                <div className="result-success">
-                  <CheckCircle size={30} /><h3>Complaint Found</h3>
-                </div>
-                {[
-                  ["Reference Number", complaint.reference],
-                  ["Title", complaint.title || "Submitted complaint"],
-                  ["Area", complaint.area || "Not available"],
-                  ["Category", complaint.category || "Not available"],
-                  ["Status", complaint.status || "Received"],
-                  ["Created At", complaint.created_at
-                    ? new Date(complaint.created_at).toLocaleString()
-                    : "Not available"]
-                ].map(([label, value]) => (
-                  <div className="result-row" key={label}>
-                    <span>{label}</span><strong>{value}</strong>
-                  </div>
-                ))}
-              </div>
-            )}
           </section>
         )}
 
@@ -815,9 +805,9 @@ function App() {
           <div className="chat-body">
             {chatMessages.length === 0 && (
               <div className="bot-message">
-                Hello! I can help you register a complaint or track its status.
+                Hello! I can help you register a complaint.
                 <button className="speak-btn"
-                  onClick={() => speakText("Hello! I can help you register a complaint or track its status.")}>
+                  onClick={() => speakText("Hello! I can help you register a complaint.")}>
                   <Volume2 size={15} /> Listen
                 </button>
               </div>
